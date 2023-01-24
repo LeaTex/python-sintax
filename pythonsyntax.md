@@ -46,7 +46,8 @@ Convertir a string: `str(aNumber)`
 Tipos:  
 enteros: `1243`  
 decimales de punto flotante: `457.54` o `7883.0` o `4785.`  
-notación científica: `4.445e8` es decir: `4.445 * 10 ** 8` (el exponente puede ser negativo)
+notación científica: `4.445e8` es decir: `4.445 * 10 ** 8` (el exponente puede ser negativo)  
+complejos: `2+3j` o `5-3i`
 
 Número mínimo y máximo definidos como flotantes: `-1e308` y `1e308`
 
@@ -59,7 +60,8 @@ Infinito: `math.inf` o `float('inf')`
 NaN (Not a Number): `math.nan` o `float('NaN')`
 
 TODO: raíces <https://youtu.be/XZ5yDv5Iz5I>  
-TODO: módulo math <https://youtu.be/TBc29BdhgE0>
+TODO: módulo math <https://youtu.be/TBc29BdhgE0>  
+TODO: integers & floats <https://youtu.be/Nc1BhYKs56Y>
 
 ## Cadenas
 
@@ -127,6 +129,10 @@ Detectar una subcadena: `subcadena in unaCadena`
 Detectar cómo inicia una cadena: `unaCadena.startswith(otraCadena)`  
 Detectar cómo finaliza una cadena: `unaCadena.endswith(otraCadena)`
 
+Indica si es un número: `una_cadena.isdigit()`  
+Indica si contiene sólo caracteres alfatéticos: `una_cadena.isalpha()`  
+Indica si contiene sólo caracteres alfanuméricos: `una_cadena.isalnum()`
+
 Dividir en subcadenas (split) usando espacios: `unaCadena.split()`  
 Dividir en subcadenas según una subcadena: `unaCadena.split(subcadena)`  
 Dividir en subcadenas por líneas: `unaCadena.splitlines()`
@@ -155,6 +161,12 @@ Alinear a completando con espacios hasta N:
 a izquierda: `una_cadena.ljust(50)` completa a derecha  
 a derecha: `una_cadena.rjust(50)` completa a izquierda  
 centrado: `una_cadena.center(50)` completa a ambos lados
+
+También se puede reemplazar el espacio por algún caracter:  
+a izquierda: `una_cadena.ljust(50, '-')`
+a derecha: `una_cadena.rjust(50, '*')`
+centrado: `una_cadena.center(50, '+')`
+
 
 TODO: format https://youtu.be/RIpPmdCgR8c y https://youtu.be/3r1Sq4RYnvg
 
@@ -190,6 +202,8 @@ Hacer `unaLista.append(unElemento)` es lo mismo que `unaLista.extend([unElemento
 
 Concatenar listas: `unaLista + otraLista`  
 Devuelve un nuevo objeto lista con ambas listas encadenadas.
+
+Repetir lista: `unaLista * un_entero`
 
 Cantidad de elementos de una lista: `len(unaLista)`  
 Si la cantidad es N, el último elemento está en la posición N-1.
@@ -270,6 +284,7 @@ Se pueden omitir los paréntesis: `x, y, z = 'elemento 1', 'elem 2', 'elem 3'`
 - agregar comprimir (compactar, empaquetar) y descomprimir (desempaquetar), uso de cabeza y cola, _ y *
 ej: *(1, 2, 3)  --> 1  2  3
 https://codigofacilito.com/videos/desempaquetado
+https://youtu.be/YPKFbxtJ2s0
 
 
 ## Conjuntos
@@ -414,6 +429,14 @@ Restar y asignar: `una_variable -= unValor`
 
 Multiplicar y asignar: `una_variable *= unValor`
 
+Dividir y asignar: `una_variable /= unValor`
+
+Módulo y asignar: `una_variable %= unValor`
+
+División entera y asignar: `una_variable //= unValor`
+
+Potencia y asignar: `una_variable **= unValor`
+
 Actualizar diccionario y asignar (desde Python 3.9): `un_dic |= otro_dic`
 
 Asignar y evaluar (walrus): `:=`
@@ -427,7 +450,10 @@ Asignar y evaluar (walrus): `:=`
 `>` Mayor  
 `!=` Distinto
 
-La comparación por igualdad también se puede con el operador `is`, pero esto resulta más amigable para objetos.
+#### Comparador is
+Mientras el operador `==` compara por igualdad de valores, la función `is` compara por identidad, es decir, por espacios de memoria.  
+Si `un_objeto is otro_objeto` entonces `id(un_objeto) == id(otro_objeto)`.  
+Si `un_objeto == otro_objeto` no necesariamente `un_objeto is otro_objeto`.
 
 ## Operadores lógicos
 
@@ -474,6 +500,75 @@ else:
 
 Circuito invertido (operador ternario), se usa para asignación:  
 `unaVariable = unValor if (condición booleana) else otroValor`
+
+## Condicional MATCH-CASE
+
+A partir de la versión 3.10 se puede utilizar el `match` que es similar el `switch` en otros leguajes.  
+
+```python
+match objeto_a_comparar:
+    case un_valor:
+        pass
+    case otro_valor:
+        pass
+    case _:
+        pass
+```
+
+Se puede utilizar para _matchear_ con un patrón (se hace _pattern matching_), por ejemplo, un diccionario con ciertas claves:
+
+```python
+un_objeto = {'nombre': una_cadena, 'edad': un_numero}
+
+match un_objeto:
+    case {'nombre': nombre, 'edad': edad}:
+        pass
+    case {'cantidad': cantidad, 'precio': precio}:
+        pass
+    case _:
+        pass
+```
+
+También se puede comparar contra un conjunto de valores usando el operador de unión `|`:
+
+```python
+match objeto_a_comparar:
+    case un_valor | otro_valor | un_valor_distinto :
+        pass
+    case nuevo_valor | otro_nuevo_valor:
+        pass
+    case _:
+        pass
+```
+
+Se pueden comprar listas por cantidad de elementos:
+
+```python
+match una_lista:
+    case [valor] :
+        pass
+    case [valor, otro_valor]:
+        pass
+    case [valor, *mas_valores]:  #cantidad indeterminada de elementos
+        pass
+    case _:
+        pass
+```
+
+Y combinar condiciones con estas propiedades:
+
+```python
+match una_lista:
+    case [valor_buscado , segundo_elemento] :
+        pass
+    case [(un_valor | otro_valor) , segundo_elemento] :
+        pass
+    case [(nuevo_valor | distinto_valor) , segundo_elemento] if segundo_elemento in [buscado, otro_buscado]:
+        pass
+    case _:
+        pass
+```
+
 
 ## Ciclo WHILE
 
@@ -533,7 +628,17 @@ for aName in ['Juan', 'Pedro', 'Carlos']:
     pass
 ```
 
+Se puede agregar un bloque `else` que se ejecuta cuando el bucle terminó por completo, pero no se ejecuta si el ciclo termina con un `break` o `return`.  
+```python
+for object in objeto_iterable:
+    pass
+else:
+    pass
+```
+
 ## Saltos y cortes en los ciclos (break y continue)
+
+Se pueden utilizar en `for` o `while`.
 
 `break` corta la ejecución del ciclo por completo y continúa la ejecución con la siguiente sentencia fuera del ciclo.
 
@@ -568,7 +673,7 @@ Levantar una excepción: `raise MyError`
 Con descripción: `raise MyError("Error description")`
 
 TODO: revisar el video https://youtu.be/YMx645JNBxk  
-TODO: revisar excepciones conocidas  (value error, key error, etc)  
+TODO: revisar excepciones conocidas  (value error, key error, type error, name error, etc)  
 TODO: crear excepción personalizada
 
 ## Comentarios
@@ -622,12 +727,13 @@ ___
 Abrir un archivo: `file_handler = open(fileName)`
 Indicando el modo: `file_handler = open(fileName, mode)`
 
-Leer todo el archivo: `contents = file_handler.read()`
+Leer desde la posición del puntero hasta el final: `contents = file_handler.read()`
 
 Leer una determinada cantidad de bytes: `contents = file_handler.read(cantidad)`  
-Deja el cursor en la última posición leída y se puede continuar a partir de ahí.
+Deja el puntero en la última posición leída y se puede continuar a partir de ahí.
 
-Leer una línea: `line = file_handler.readline()`
+Leer una línea: `line = file_handler.readline()`  
+Leer todas las líneas: `lines = file_handler.readlines()`
 
 Recorrer por líneas:
 
@@ -636,9 +742,14 @@ for line in file_handler:
     pass
 ```
 
-Escribir una línea: `file_handler.write("Una línea de texto")`
+Ubicar el puntero en una posición: `file_handler.seek(posicion)`
+
+Escribir una línea: `file_handler.write("Una línea de texto")`  
+Escribir varias líneas: `file_handler.writelines(lista_de_lineas)`
 
 Cerrar el archivo: `file_handler.close()`
+
+Indica si está cerrado: `file_handler.closed`
 
 Cierra automáticamente el archivo luego de usarlo:
 
@@ -647,6 +758,28 @@ with open(file_name) as file_handler:
     pass
 ```
 
+Se puede utilizar para más de un archivo:
+
+```python
+with open(file_name) as file_handler, open(other_name) as other_handler:
+    pass
+```
+
+O también:
+
+```python
+with (open(file_name) as file_handler, 
+      open(other_name) as other_handler):
+    pass
+```
+
 Modos:  
 `r` read only  
-`w` write
+`rb` read binary  
+`r+` read and write  
+`w` write  
+`wb` write brinary  
+`a` append  
+`ab` append binary
+
+TODO: context manager <https://youtu.be/J5paZNIqqHI> , <https://youtu.be/qkpURBYk7Eo>

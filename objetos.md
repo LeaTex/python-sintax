@@ -1,19 +1,21 @@
 # Objetos
-- <https://www.python-course.eu/python3_properties.php>
-- <https://realpython.com/instance-class-and-static-methods-demystified/>
-
+- [Object Oriented Programming in Python – Full Crash Course](https://www.freecodecamp.org/news/crash-course-object-oriented-programming-in-python/)
+- [Object-Oriented Programming (OOP) in Python 3](https://realpython.com/python3-object-oriented-programming/)
+- [Python's Instance, Class, and Static Methods Demystified](https://realpython.com/instance-class-and-static-methods-demystified/)
+- [Primer on Python Decorators](https://realpython.com/primer-on-python-decorators/)
+- [Properties vs. Getters and Setters](https://www.python-course.eu/python3_properties.php)
 
 ## Generalidades
 
 Clase de un objeto: `type(anObject)`
 
-Métodos de un objeto: `dir(anObject)`
+Métodos y atributos de un objeto: `dir(anObject)`
 
 Detalles de un objeto (muestra el docstring): `help(anObject)`
 
 Definición de una clase:  
 ```python
-class MiClasePadre():
+class MiClasePadre:
     VARIABLE_DE_CLASE = unValor
 
     variable_de_clase_dos = otroValor
@@ -28,7 +30,7 @@ class MiClasePadre():
 
 Se pueden definir atributos y métodos "privados" utilizando doble _ en el nombre, y solo podrán accederse desde la propia instancia.  
 ```python
-class MiClasePadre():
+class MiClasePadre:
     def __init__(self, valorNuevo):
         self._atributo_protegido = "usa guión bajo"  # es simbólico porque igual se puede acceder
         self.__atributo_privado = None  # se accede con _MiClasePadre__atributo_privado
@@ -38,11 +40,14 @@ class MiClasePadre():
         pass
 ```
 
+En realidad el `__` al inicio de un atributo es para indicarle al intérprete que le cambie el nombre al atributo internamente, y así evitar colisiones (name mangling).  
+Pero utilizando `dir(objeto)` se pueden ver los atributos definimos y encontrar el nombre asignado para utilizarlo como si fuera un atributo público más.
+
 ## Atributos 
 
 Se pueden definir atributos de clase en la definición de la misma:  
 ```python
-class MiClase():
+class MiClase:
 
     atributo_de_clase = valor
     otro_atributo_de_clase = None
@@ -57,7 +62,7 @@ obj.atributo_de_clase
 
 Los atributos de instancia se definen de manera dinámica cuando se asignan por primera vez. Se puede hacer en la definición de la clase, o en cualquier método:  
 ```python
-class MiClase():
+class MiClase:
 
     def __init__(self, valorNuevo):
         self.variable_de_instancia = valorNuevo
@@ -73,7 +78,7 @@ TODO: ver vars()
 
 Se pueden definir métodos para ser usados como atributos:  
 ```python
-class MiClase():
+class MiClase:
 
     __variable_privada = None
 
@@ -94,13 +99,27 @@ mi_objeto.variable_privada = un_valor  # setter
 mi_objeto.variable_privada  # getter
 ```
 
+TODO: agregar el "deleter" (https://youtu.be/XiAkEGnZfxg)
+
+
+## Métodos
+
+### Métodos de instancia
+
+un_objeto.un_metodo()
+UnaClase.un_metodo(un_objeto)
+
+### Métodos de clase
+
+### Métodos estáticos
+
 ## Herencia
 
 ```python
 class MiClaseHija(MiClasePadre):
 
     def __init__(self, valorNuevo, otroValor):
-        MiClasePadre.__init__(valorNuevo)
+        super().__init__(valorNuevo)
         self.otra_variable = otroValor
 
     def metodo(self):
@@ -124,7 +143,7 @@ __module__
 __dict__
 
 ## TODO: objetos
-- __init__()
+- __new__ y también __init__()
 - declaración de atributos dentro y fuera de la clase
 - variables de clase
 - https://www.youtube.com/playlist?list=PLP8GkvaIxJP0VAXF3USi9U4JnpxUvQXHx
@@ -137,3 +156,13 @@ __dict__
 - diccionario de atributos con __dict__
 - clases decoradoras y uso de __call__
 - Dataclass
+- isinstance(instancia, clase)
+- issubclass(Hijo, Padre)
+- sobrecarga de operadores: https://youtu.be/wvqHBpnYK5w y https://youtu.be/mJmorWE0MXU
+- clases internas: https://youtu.be/ffnEHOuFsmc
+- métodos dunder https://youtu.be/buwkgsBg33E
+- clases y métodos abstractos: https://youtu.be/41EFoLcCQUs
+- sys.getrefcount(an_object)
+- del(an_object) y __del__(self)
+- descriptor como validador para datos
+- uso de Protocol par definir Interfaces

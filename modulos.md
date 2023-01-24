@@ -33,6 +33,9 @@ No se recomienda su uso porque puede resultar confuso.
 ### Paquete
 
 Un paquete es un módulo que contiene adentro otros módulos. Generalmente un directorio será un paquete (módulo principal) y sus archivos los módulos (secundarios).
+
+Se debe crear un archivo de nombre `__init__.py` en la carpeta para que se considere correctamente como un paquete.
+
 Se puede importar un paquete como un módulo más, o importar un submódulo.
 
 ```python

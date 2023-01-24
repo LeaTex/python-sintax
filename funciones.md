@@ -107,9 +107,14 @@ def nombre_funcion(argumento=unValorDefault):
     pass
 ```
 
-La documentación puede ser accedida por el atributo `doc`:  
-`nombre_funcion.__doc__`  
-`help(nombre_funcion)`
+La documentación puede ser accedida por el atributo `doc`: `nombre_funcion.__doc__`  
+O usando la función: `help(nombre_funcion)`
+
+También se puede agregar docstring en los módulos, y objetos. En todos los casos se puede acceder con la función:  
+`help(modulo)`  
+`help(UnaClase)`  
+`help(UnaClase.un_metodo)`  
+`help(un_metodo)`
 
 El módulo `doctest` permite hacer pruebas rápidas de las funciones, si dentro de su documentación se encuentran invocaciones a modo de ejemplo como si se ejecutaran desde el shell.
 
@@ -120,6 +125,7 @@ def nombre_funcion(argumento=unValorDefault):
 
     >>> nombre_funcion(123)
     resultadoEsperado
+
     >>> nombre_funcion('abc')
     resultadoEsperado
     """
@@ -129,6 +135,20 @@ def nombre_funcion(argumento=unValorDefault):
 Se ejecutan las pruebas llamando al módulo:  
 `python -m doctest miarchivo.py`
 
+También se puede testear el módulo a sí mismo al ejecutarlo directamente:  
+```python
+def nombre_funcion(argumento=unValorDefault):
+    """
+    Lo que sigue es para doctesting
+
+    >>> nombre_funcion(123)
+    resultadoEsperado
+    """
+    pass
+
+import doctest
+doctest.testmod()
+```
 
 ### Alias de funciones
 
@@ -200,6 +220,7 @@ Una vez finalizado genera un `StopIteration` si vuelve a invocarse.
 
 Más: <https://docs.python.org/3.7/howto/functional.html#generator-expressions-and-list-comprehensions>
 
+TODO: yield from
 
 ## Rangos
 
@@ -346,6 +367,8 @@ Se puede usar con funciones: `resultado = reduce(nombre_funcion, lista, valorIni
 O con expresiones lambda: `resultado = reduce(lambda resultadoPrevio, unElemento : expresión , lista, valorInicial)`  
 El valor inicial es opcional, en ese caso la primera evaluación se hace con los 2 primeros elementos de la lista.
 
+Para utilizarla hay que importar el módulo `functools`.
+
 ### Funciones all() any()
 
 `any(unaListaDeBooleanos)` retorna True si alguno de los elementos de la lista es True.
@@ -360,6 +383,9 @@ Ej: `all(aBooleanExpression for aValue in aList)`
 `zip()`retorna un iterador con tuplas de N componentes a partir de aparear N listas. Se utiliza para iteraciones en paralelo.  
 La longitud del iterador corresponde a lo longitud de la lista más corta.  
 `zipped = zip(unaLista, otraLista)`
+
+Se puede indicar que sea obligatorio que las listas tengan la misma longitud, y en caso contrario se levantará un error:  
+`zipped = zip(unaLista, otraLista, strict=True)`
 
 `zip_longest()` funciona igual que `zip()` pero utilizando la longitud de la lista más larga, y armando las tuplas con un valor de "relleno" para la lista más corta. Este valor por defecto es `None` pero se puede cambiar usando el parámetro `fillvalue`.  
 `zipped = zip_longest(unaLista, otraLista)`  
