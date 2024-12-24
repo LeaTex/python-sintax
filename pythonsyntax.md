@@ -228,7 +228,7 @@ Ordenar lista en forma ascendente (si sus elementos son comparables y ordenables
 
 Ordenar lista en forma descendente: `unaLista.sort(reverse = True)`
 
-Devolver una nueva lista con orden invertido: `reversed(unaLista))`
+Devolver un iterable sobre la lista con orden invertido: `reversed(unaLista))`
 
 También se puede llamar a la función: `sorted(unaLista, reverse = True)`  
 Retorna una nueva lista, sin modificar la original.
@@ -236,6 +236,8 @@ Retorna una nueva lista, sin modificar la original.
 Buscar el menor valor: `min(unaLista)`
 
 Buscar el mayor valor: `max(unaLista)`
+
+Sumatoria de los elementos: `sum(unaLista)`
 
 Buscar elemento en una lista  
 existencia: `elemento in unaLista`  

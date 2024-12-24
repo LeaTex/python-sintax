@@ -336,6 +336,12 @@ def decorador(a_decorar):
 
 ## Funciones sobre objetos iterables
 
+### Función sorted()
+
+Nueva lista ordenada: `lista_ordenada = sorted(lista)`  
+Ordenada en forma invertida: `lista_ordenada = sorted(lista, reverse=True)`  
+Indicar el criterio (función) para ordenar: `lista_ordenada = sorted(lista, key=func)`  o `lista_ordenada = sorted(lista, key=lambda x: ...)`
+
 ### Función map()
 
 `map()` recorre un objeto iterable (lista) y aplica una función para cada elemento de la lista. Retorna un objeto map, que se puede convertir a lista, con los resultados de evaluar la función para cada elemento. (Es como el `collect:` de Smalltalk.)
@@ -398,6 +404,7 @@ También dada una lista de tuplas, se puede "desaparear" en una lista de listas 
 `zipped = zip(*listaDeTuplas)`
 
 ### TODO: funciones
+- reversed()
 - parámetros con ++
 - annotations (tipos en los parámetros y retornos)
 - anotaciones (tipado)

@@ -27,6 +27,8 @@
 - [traceback] para dumpear stack en el handling de excepciones
 - [pprint] pretty print JSON data
 - pickle: serializar objetos con dump y load
+- dotenv: cargar variables de entorno en el SO desde archivo .env
+- decouple: cargar configuración desde archivo .env en un objeto
 
 # varios
 - [colorama](https://pypi.org/project/colorama/) Makes ANSI escape character sequences (for producing colored terminal text and cursor positioning) work under MS Windows.

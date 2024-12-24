@@ -99,7 +99,8 @@ mi_objeto.variable_privada = un_valor  # setter
 mi_objeto.variable_privada  # getter
 ```
 
-TODO: agregar el "deleter" (https://youtu.be/XiAkEGnZfxg)
+TODO: agregar el "deleter" (https://youtu.be/XiAkEGnZfxg)  
+TODO: uso de property() https://youtu.be/W-4NfDXuk7w
 
 
 ## Métodos
@@ -166,3 +167,4 @@ __dict__
 - del(an_object) y __del__(self)
 - descriptor como validador para datos
 - uso de Protocol par definir Interfaces
+- getattr() hasattr() setattr() delattr()
